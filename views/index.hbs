@@ -15,7 +15,38 @@
 <body>
 
   <h1>Velkuri</h1>
-  {{ velat }}
+
+  <h2>Velat</h2>
+  <table class="velat">
+    <thead>
+      <tr>
+        <th>Lainaaja</th><th>Summa</th><th>Toiminnot</th>
+      </tr>
+    </thead>
+    <tbody data-bind="foreach: velat">
+      <tr>
+        <td data-bind="text: _id"></td><td data-bind="text: yhteensa"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Lainat</h2>
+  <table class="lainat">
+    <thead>
+      <tr>
+        <th>Velallinen</th><th>Summa</th><th>Toiminnot</th>
+      </tr>
+    </thead>
+    <tbody data-bind="foreach: lainat">
+      <tr>
+        <td data-bind="text: _id"></td><td data-bind="text: yhteensa"></td>
+      </tr>
+    </tbody>
+  </table>
   
+  <script src="js/atomic.min.js"></script>
+  <script src="js/knockout.js"></script>
+  <script src="js/app.js"></script>
+
 </body>
 </html>

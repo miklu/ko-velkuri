@@ -22,7 +22,8 @@ app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/public'));
 app.use(favicon());
 app.use(logger('dev'));
-app.use(bodyParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride());
 
 var mongoUrl = 'mongodb://localhost/velkuri';
