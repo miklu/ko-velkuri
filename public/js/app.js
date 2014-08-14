@@ -1,17 +1,29 @@
 function ViewModel() {
   var self = this;
-  this.velat = ko.observable();
-  this.lainat = ko.observable();
+  self.velat = ko.observable();
+  self.lainat = ko.observable();
+  self.velatSumma = ko.observable();
+  self.lainatSumma = ko.observable();
 
   atomic.get('/velat')
     .success(function(data, xhr) {
       self.velat(data);
+      self.velatSumma(laskeSumma(data));
     });
 
   atomic.get('/lainat')
     .success(function(data, xhr) {
       self.lainat(data);
+      self.lainatSumma(laskeSumma(data));
     });
+}
+
+function laskeSumma(array) {
+  var summa = 0;
+  array.forEach(function(elem) {
+    summa += elem.yhteensa;
+  });
+  return summa;
 }
 
 ko.applyBindings(new ViewModel());

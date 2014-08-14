@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Velka = require('./models');
 
-var a = [];
-
 // Velkojen summat lanaajan mukaan
 router.get('/velat', function(req, res) {
   Velka.haeVelat(function(err, velat) {
@@ -15,6 +13,20 @@ router.get('/velat', function(req, res) {
     }
 
   });
+});
+
+router.post('/tallenna', function(req, res) {
+  var velka = new Velka({
+    lainaaja: req.body.lainaaja,
+    velallinen: req.body.velallinen,
+    kuvaus: req.body.kuvaus,
+    summa: req.body.summa,
+  });
+
+  velka.save(function(err, doc) {
+    res.json(doc);
+  });
+
 });
 
 // Kaikki velat tietoineen lainaajan mukaan
@@ -46,15 +58,7 @@ router.get('/lainat/:nimi', function(req, res) {
 
 // Etusivu
 router.get('/', function(req, res) {
-  Velka.haeKaikki(function(err, velat) {
-    if (err) {
-      res.send('Kaikkien velkojen haussa tapahtui virhe.');
-    } else {
-      res.render('index', {
-        velat: velat
-      });
-    }
-  });
+      res.render('index');
 });
 
 module.exports = router;
