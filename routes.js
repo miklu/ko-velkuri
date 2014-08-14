@@ -10,6 +10,7 @@ router.get('/velat', function(req, res) {
       console.log(err);
     } else {
       res.json(velat);
+      console.log(velat);
     }
 
   });
@@ -36,7 +37,7 @@ router.get('/velat/:nimi', function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.json(docs);
+      res.json(velat);
     }
 
   });

@@ -25,7 +25,7 @@
       </tr>
     </thead>
     <tbody data-bind="foreach: velat">
-      <tr>
+      <tr data-bind="click: $root.showDetails">
         <td data-bind="text: _id"></td><td data-bind="text: yhteensa"></td>
       </tr>
     </tbody>
@@ -44,6 +44,13 @@
       </tr>
     </tbody>
   </table>
+
+  <div data-bind="foreach: details">
+    <p data-bind="text: lainaaja"></p>
+    <p data-bind="text: velallinen"></p>
+    <p data-bind="text: summa"></p>
+    <p data-bind="text: kuvaus"></p>
+  </div>
   
   <script src="js/atomic.min.js"></script>
   <script src="js/knockout.js"></script>
