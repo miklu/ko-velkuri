@@ -56,6 +56,18 @@ router.put('/muokkaa/:id', function(req, res) {
   });
 });
 
+// Poistaminen
+router.delete('/poista/:id', function(req, res) {
+  Velka.findByIdAndRemove(req.params.id, function(err, removed) {
+    if(err) {
+      throw err;
+    }
+    else {
+      res.json(removed);
+    }
+  });
+});
+
 // Kaikki velat tietoineen lainaajan mukaan
 router.get('/velat/:nimi', function(req, res) {
   Velka.haeVelanTiedot(req.params.nimi, function(err, velat) {
