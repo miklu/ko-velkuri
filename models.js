@@ -12,7 +12,7 @@ var VelatSchema = mongoose.Schema({
 
 
 VelatSchema.statics.haeKaikki = function(cb) {
-  return this.find({}).sort({'lainaaja': 'desc'}).exec(cb);
+  return this.find({}).exec(cb);
 };
 
 VelatSchema.statics.haeVelat = function(cb) {
