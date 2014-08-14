@@ -1,58 +1,71 @@
+
+
+/******************************************************
+# RIIPPUVUUDET
+******************************************************/
 var gulp = require('gulp'),
-  less = require('gulp-less'),
-  autoprefixer = require('gulp-autoprefixer'),
-  minifycss = require('gulp-minify-css'),
-  rename = require('gulp-rename'),
-  uglify = require('gulp-uglify'),
-  concat = require('gulp-concat'),
-  connect = require('gulp-connect'),
-  livereload = require('gulp-livereload'),
-  path = require('path');
+    less = require('gulp-less'),
+    uglify = require('gulp-uglify'),
+    rename = require('gulp-rename'),
+    concat = require('gulp-concat'),
+    notify = require('gulp-notify'),
+    plumber = require('gulp-plumber'),
+    minifyCss = require('gulp-minify-css'),
+    autoprefixer = require('gulp-autoprefixer'),
+    livereload = require('gulp-livereload'),
+    path = require('path');
 
-gulp.task('styles', function() {
-  gulp.src('./public/css/*.less')
+/******************************************************
+# SIJAINNIT
+******************************************************/
+var kohde = {
+  less: 'public/less/**/*.less',
+  css: 'public/css',
+  js: 'public/js/**/*.js',
+  html: 'views/**/*.hbs'
+};
+
+
+/******************************************************
+# LESS
+******************************************************/
+gulp.task('less', function() {
+  gulp.src(kohde.less)
+    .pipe(plumber())
     .pipe(less({
-      paths: [path.join(__dirname, 'less', 'includes')]
+      paths: [ path.join(__dirname, 'less', 'includes')]
     }))
-    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-    .pipe(gulp.dest('./public/css'))
-    .pipe(rename({
-      suffix: '.min'
-    }))
-    .pipe(minifycss())
-    .pipe(gulp.dest('./public/css'))
-    .pipe(connect.reload());
+    .pipe(autoprefixer(
+      'last 2 version',
+      '> 1%',
+      'ie 8',
+      'ie 9',
+      'ios 6',
+      'android 4'
+    ))
+    .pipe(minifyCss())
+    .pipe(gulp.dest(kohde.css))
+    .pipe(notify({message: 'Less-tiedostot käännetty!'}))
+    .pipe(livereload());
 });
 
-gulp.task('hbs', function() {
-  gulp.src('./public/views/*.hbs')
-    .pipe(connect.reload());
+/******************************************************
+# HTML
+******************************************************/
+gulp.task('html', function() {
+  gulp.src(kohde.html)
+  .pipe(livereload());
 });
 
-gulp.task('scripts', function() {
-  gulp.src('./public/js/atomic.min.js', './public/js/knockout.js', './public/js/app.js')
-    .pipe(concat('all.js'))
-    .pipe(gulp.dest('./public/js'))
-    .pipe(rename({
-      suffix: '.min'
-    }))
-    .pipe(uglify())
-    .pipe(gulp.dest('./public/js'));
-});
-
+/******************************************************
+# WATCH
+******************************************************/
 gulp.task('watch', function() {
-  gulp.watch('./public/views/*.hbs', ['hbs']);
-  gulp.watch('./public/css/*.less', ['styles']);
+
+  var server = livereload();
+
+  gulp.watch(kohde.html, ['html']);
+  gulp.watch(kohde.less, ['less']);
 });
 
-
-gulp.task('connect', function() {
-  var express = require('./server');
-  connect.server({
-    root: 'public',
-    livereload: true,
-    port: 3000
-  });
-});
-
-gulp.task('default', ['connect', 'styles', 'watch']);
+gulp.task('default', ['less', 'watch']);
