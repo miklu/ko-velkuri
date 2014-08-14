@@ -16,13 +16,7 @@ router.get('/velat', function(req, res) {
 
 // Tallennus
 router.post('/tallenna', function(req, res) {
-  var velka = new Velka({
-    lainaaja: req.body.lainaaja,
-    velallinen: req.body.velallinen,
-    kuvaus: req.body.kuvaus,
-    summa: req.body.summa,
-  });
-
+  var velka = new Velka(req.body);
   velka.save(function(err, doc) {
     if(err) {
       throw err;

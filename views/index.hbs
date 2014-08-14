@@ -15,46 +15,32 @@
 
 <body>
 
-  <h1>Velkuuri</h1>
-
-  <h2>Velat <span data-bind="text: velatSumma"></span> €</h2>
-  <table class="velat">
+  <h1>Velkuri</h1>
+  
+  <!-- Lisää lomake -->
+  <input type="text" placeholder="lainaaja" data-bind="value: lomake.lainaaja" />
+  <input type="text" placeholder="velallinen" data-bind="value: lomake.velallinen" />
+  <input type="text" placeholder="summa" data-bind="value: lomake.summa">
+  <input type="text" placeholder="kuvaus" data-bind="value: lomake.kuvaus">
+  <button data-bind="click: tallenna">Tallenna</button>
+  
+  <!-- Velat taulukko -->
+  <table>
     <thead>
       <tr>
-        <th>Lainaaja</th><th>Summa</th><th>Toiminnot</th>
+        <th>Lainaaja</th>
+        <th>Summa</th>
       </tr>
     </thead>
     <tbody data-bind="foreach: velat">
-      <tr data-bind="click: $root.showDetails">
-        <td data-bind="text: _id"></td><td data-bind="text: yhteensa"></td>
+      <tr>
+        <td data-bind="text: _id"></td>
+        <td data-bind="text: yhteensa"></td>
       </tr>
     </tbody>
   </table>
 
-  <h2>Lainat <span data-bind="text: lainatSumma"></span> €</h2>
-  <table class="lainat">
-    <thead>
-      <tr>
-        <th>Velallinen</th><th>Summa</th><th>Toiminnot</th>
-      </tr>
-    </thead>
-    <tbody data-bind="foreach: lainat">
-      <tr>
-        <td data-bind="text: _id"></td><td data-bind="text: yhteensa"></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div data-bind="foreach: details">
-    <p data-bind="text: _id"></p>
-    <p data-bind="text: lainaaja"></p>
-    <p data-bind="text: velallinen"></p>
-    <p data-bind="text: summa"></p>
-    <p data-bind="text: kuvaus"></p>
-  </div>
-
-  
-  <script src="js/atomic.min.js"></script>
+  <script src="js/jquery-2.1.1.min.js"></script>
   <script src="js/knockout.js"></script>
   <script src="js/app.js"></script>
 

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var VelatSchema = mongoose.Schema({
+  pvm: {type: Date, default: Date.now},
   lainaaja: String,
   velallinen: String,
   kuvaus: String,
@@ -11,7 +12,7 @@ var VelatSchema = mongoose.Schema({
 
 
 VelatSchema.statics.haeKaikki = function(cb) {
-  return this.find({}).exec(cb);
+  return this.find({}).sort({'lainaaja': 'desc'}).exec(cb);
 };
 
 VelatSchema.statics.haeVelat = function(cb) {
@@ -26,7 +27,7 @@ VelatSchema.statics.haeVelat = function(cb) {
         $sum: "$summa"
       }
     }
-  }).exec(cb);
+  }).sort({'pvm': 'desc'}).exec(cb);
 };
 
 VelatSchema.statics.haeVelanTiedot = function(nimi, cb) {
