@@ -2,20 +2,19 @@ var express = require('express');
 var router = express.Router();
 var Velka = require('./models');
 
-// Velkojen summat lanaajan mukaan
+// Velkojen summat lainaajan mukaan
 router.get('/velat', function(req, res) {
   Velka.haeVelat(function(err, velat) {
-
     if (err) {
       console.log(err);
     } else {
       res.json(velat);
       console.log(velat);
     }
-
   });
 });
 
+// Tallennus
 router.post('/tallenna', function(req, res) {
   var velka = new Velka({
     lainaaja: req.body.lainaaja,
@@ -25,9 +24,36 @@ router.post('/tallenna', function(req, res) {
   });
 
   velka.save(function(err, doc) {
-    res.json(doc);
+    if(err) {
+      throw err;
+    }
+    else {
+      res.json(doc);
+    }
   });
+});
 
+// Muokkaus
+router.put('/muokkaa/:id', function(req, res) {
+  Velka.findById(req.params.id, function(err, result) {
+    if(err) {
+      throw err;
+    }
+    else {
+      result.lainaaja = req.body.lainaaja;
+      result.velallinen = req.body.velallinen;
+      result.summa = req.body.summa;
+      result.kuvaus = req.body.kuvaus;
+      result.save(function(err, saved) {
+        if(err) {
+          throw err;
+        }
+        else {
+          res.json(saved);
+        }
+      });
+    }
+  });
 });
 
 // Kaikki velat tietoineen lainaajan mukaan
@@ -47,6 +73,7 @@ router.get('/velat/:nimi', function(req, res) {
 router.get('/lainat', function(req, res) {
   Velka.haeLainat(function(err, docs) {
     res.json(docs);
+    console.log(docs);
   });
 });
 
