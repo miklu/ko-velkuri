@@ -26,13 +26,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride());
 
-var mongoUrl = 'mongodb://localhost/velkuri';
+var mongoUrl = process.env.MONGOLAB_URI || 'mongodb://localhost/velkuri';
 
 mongoose.connect(mongoUrl);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Virhe yhdistäessä tietokantaan'));
 db.once('open', function() {
-  console.log('Yhdistetty tietokantaan');
+  console.log('Yhdistetty tietokantaan: ' + mongoUrl);
 });
 
 app.use('/', routes);
