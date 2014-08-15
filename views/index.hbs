@@ -9,16 +9,63 @@
 
   <title>Velkuri</title>
   <meta name="description" content="Pidä kirjaa veloistasi">
+
+  
+  <link rel="stylesheet" href="css/uikit.min.css">
   <link rel="stylesheet" href="css/styles.css">
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
 </head>
 
 <body>
 
-  <h1>Velkuri</h1>
+
+  <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+    <nav class="uk-navbar uk-margin-large-bottom">
+      <a href="#" class="uk-navbar-brand">Velkuri</a>
+      <ul class="uk-navbar-nav">
+        <li class="uk-active">
+          <a href="#">Lisää</a>
+        </li>
+        <li><a href="#">Velat</a></li>
+        <li><a href="#">Lainat</a></li>
+      </ul>
+    </nav>
+
+    <form class="uk-panel uk-panel-box uk-form">
+      <div class="uk-form-row">
+        <input type="text" class="uk-width-1-1 uk-form-large" placeholder="Lainaaja">
+      </div>
+      <div class="uk-form-row">
+        <input type="text" class="uk-width-1-1 uk-form-large" placeholder="Velallinen">
+      </div>
+      <div class="uk-form-row">
+        <input type="text" class="uk-width-1-1 uk-form-large" placeholder="Summa">
+      </div>
+      <div class="uk-form-row">
+        <input type="text" class="uk-width-1-1 uk-form-large" placeholder="Kuvaus">
+      </div>
+      <div class="uk-form-row">
+        <a href="#" class="uk-width-1-1 uk-button uk-button-primary uk-button-large">Tallenna</a>
+      </div>
+    </form>
+
+    <div class="uk-grid" data-uk-grid-margin>
+      <div class="uk-width-1-1">
+        <table class="uk-table uk text-nowrap">
+        <thead>
+          <tr>
+            <th>Otsikko</th>
+            <th>Otsikko</th>
+          </tr>
+        </thead>
+        </table>
+      </div>
+    </div>
+    
+  </div>
   
   <!-- Lisää lomake -->
-  <input type="text" placeholder="lainaaja" data-bind="value: lomake.lainaaja" />
+  <input type="text" class="autocomplete" placeholder="lainaaja" data-bind="value: lomake.lainaaja, autoComplete: lomake.lainaaja"} />
   <input type="text" placeholder="velallinen" data-bind="value: lomake.velallinen" />
   <input type="text" placeholder="summa" data-bind="value: lomake.summa">
   <input type="text" placeholder="kuvaus" data-bind="value: lomake.kuvaus">
@@ -50,8 +97,11 @@
   </ul>
 
   <script src="js/jquery-2.1.1.min.js"></script>
+  <script src="js/uikit.min.js"></script>
   <script src="js/knockout.js"></script>
+  <script src="js/helpers.js"></script>
   <script src="js/app.js"></script>
+
 
 </body>
 </html>

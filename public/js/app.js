@@ -1,3 +1,4 @@
+(function() {
 
 var ViewModel = function() {
   var self = this;
@@ -85,3 +86,5 @@ var ViewModel = function() {
 };
 
 ko.applyBindings(new ViewModel());
+
+})();
