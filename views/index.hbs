@@ -33,12 +33,16 @@
       </tr>
     </thead>
     <tbody data-bind="foreach: velat">
-      <tr>
+      <tr data-bind="click: $root.naytaVelanTiedot">
         <td data-bind="text: _id"></td>
         <td data-bind="text: yhteensa"></td>
       </tr>
     </tbody>
   </table>
+
+  <ul data-bind="foreach: velanTiedot">
+    <li><p data-bind="text: summa"></p><span data-bind="text: kuvaus"></span><a href="#" data-bind="click: $root.poista">Poista</a></li>
+  </ul>
 
   <script src="js/jquery-2.1.1.min.js"></script>
   <script src="js/knockout.js"></script>
