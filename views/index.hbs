@@ -41,7 +41,12 @@
   </table>
 
   <ul data-bind="foreach: velanTiedot">
-    <li><p data-bind="text: summa"></p><span data-bind="text: kuvaus"></span><a href="#" data-bind="click: $root.poista">Poista</a></li>
+    <li>
+      <p data-bind="text: summa"></p>
+      <span data-bind="text: kuvaus"></span>
+      <a href="#" data-bind="click: $root.poista">Poista</a>
+      <a href="#" data-bind="click: $root.muokkaa">Muokkaa</a>
+    </li>
   </ul>
 
   <script src="js/jquery-2.1.1.min.js"></script>
