@@ -26,12 +26,12 @@
         <li class="uk-active">
           <a href="#">Lisää</a>
         </li>
-        <li><a href="#">Velat</a></li>
+        <li><a href="#" data-bind="click: navigoi">Velat</a></li>
         <li><a href="#">Lainat</a></li>
       </ul>
     </nav>
 
-    <form class="uk-panel uk-panel-box uk-form">
+    <form class="uk-panel uk-panel-box uk-form" data-bind="visible: lomake.isVisible">
       <div class="uk-form-row">
         <input type="text" class="uk-width-1-1 uk-form-large" placeholder="Lainaaja">
       </div>
@@ -51,13 +51,13 @@
 
     <div class="uk-grid" data-uk-grid-margin>
       <div class="uk-width-1-1">
-        <table class="uk-table uk text-nowrap">
-        <thead>
-          <tr>
-            <th>Otsikko</th>
-            <th>Otsikko</th>
-          </tr>
-        </thead>
+        <table class="uk-table uk text-nowrap" data-bind="visible: velatTaulukko">
+          <thead>
+            <tr>
+              <th>Otsikko</th>
+              <th>Otsikko</th>
+            </tr>
+          </thead>
         </table>
       </div>
     </div>

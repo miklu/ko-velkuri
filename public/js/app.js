@@ -4,8 +4,15 @@ var ViewModel = function() {
   var self = this;
   self.velat = ko.observableArray();
   self.velanTiedot = ko.observableArray();
-  self.lomake = {lainaaja: ko.observable(), velallinen: ko.observable(), summa: ko.observable(), kuvaus: ko.observable(), isNew: ko.observable(true)};
+  self.lomake = {lainaaja: ko.observable(), velallinen: ko.observable(), summa: ko.observable(), kuvaus: ko.observable(), isNew: ko.observable(true), isVisible: ko.observable(true)};
+  self.velatTaulukko = ko.observable(false);
   self.muokattavaID = null;
+
+  self.navigoi = function(clicked, e) {
+    console.log(clicked, e);
+    self.lomake.isVisible(false);
+    self.velatTaulukko(true);
+  };
 
   self.haeVelat = function() {
     $.get('/velat', function(data) {
